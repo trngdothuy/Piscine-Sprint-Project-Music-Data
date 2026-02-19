@@ -1,4 +1,4 @@
-# Piscine Sprint Project: Shared Bookmarks
+# Piscine Sprint Project: Music Data
 #### By Trang Do (@trngdothuy) 
 
 ## Link to the deployed website:
