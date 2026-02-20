@@ -1,6 +1,8 @@
 import { countUsers, getMostListenedSongCount } from "./common.js";
 
 const userSelector = document.getElementById("user-selector")
+const userId = document.querySelector("h2")
+const userDataDiv = document.getElementById("user-data")
 
 const questions = ["Most listened song (count)", 
     "Most listened song (time)", 
@@ -14,7 +16,7 @@ const questions = ["Most listened song (count)",
 
 let state = {
     "userId": "1",
-    "userData": {},
+    "userData": [],
 }
 
 function makeSelectorBar() {
@@ -34,6 +36,34 @@ userSelector.addEventListener("change", (e) => {
   // update state.userId = e.target.value
 })
 
-state.userData[questions[0]] = getMostListenedSongCount(state.userId)
+// update state
+state.userData.push([
+  [questions[0]], getMostListenedSongCount(state.userId)
+])
 
 console.log(state)
+
+// render
+function render() {
+ userId.innerHTML = `User ${state.userId} Listening History`
+
+ state.userData.forEach((question) => {
+  console.log(question[0])
+
+  const div = document.createElement("div")
+  div.className = "questionDiv"
+
+  const questionP = document.createElement("p")
+  questionP.className = "question-p"
+  questionP.innerHTML = `${question[0]}:` 
+
+  const answerP = document.createElement("p")
+  answerP.className = "answer-p"
+  answerP.innerHTML = `${question[1].artist} - ${question[1].title}`
+
+  div.append(questionP, answerP)
+  userDataDiv.append(div)
+ }) 
+}
+
+render()
