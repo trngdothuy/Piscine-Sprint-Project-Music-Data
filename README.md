@@ -6,15 +6,9 @@
 ## Introduction
 ### User Story
 
-<!-- I'm a developers who loves to learn and self-develop. Every day, I spent a lot of time reading online, and I found tons of useful links that I would love to save them to come back later. And I also want to share my beautiful and useful bookmarks collection with my fellows. 
+I'm a music lover who enjoys spending hours listening to music. I'm curious about my listening history and have a list of questions about it. I want to know the answers and my friends also love to do that. 
 
-Therefore, I create this website so that I can see my list of bookmarks and copy the link. Plus, I can add more useful resources. At the same time, my fellows can also do that own their own. And we can switch from one person's page to another one. -->
-
-A common task in software is to take some data, process it in some way, and present it usefully to someone.
-
-We have supplied a collection of data for you to analyse. Your task is to write code which processes this data and shows useful conclusions to a user.
-
-Make a small HTML + JavaScript frontend which displays the answers to several questions, which are listed below.
+So I want to have this website to display the answers to the questions about our listening behaviors (that are listed below). We should be able to choose whose information we want to see from the selector bars. 
 
 ### Questions to answer
 1. What was the user's most often listened to song according to the data?
