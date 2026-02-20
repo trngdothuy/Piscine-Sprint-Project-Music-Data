@@ -1,5 +1,14 @@
 import { countUsers } from "./common.js";
 
-window.onload = function () {
-  document.querySelector("body").innerText = `There are ${countUsers()} users`;
+const userSelector = document.getElementById("user-selector")
+
+function render() {
+  for (let i = 0; i < countUsers(); i++) {
+    let option = document.createElement("option")
+    option.value = i;
+    option.innerHTML = `User ${i}`
+    userSelector.append(option)
+  }
 };
+
+render()
