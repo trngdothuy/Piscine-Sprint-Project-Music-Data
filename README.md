@@ -2,6 +2,7 @@
 #### By Trang Do (@trngdothuy) 
 
 ## Link to the deployed website:
+https://musicdata-trngdothuy.netlify.app/
 
 ## Introduction
 ### User Story
