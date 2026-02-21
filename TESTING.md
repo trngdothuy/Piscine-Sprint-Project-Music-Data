@@ -41,3 +41,12 @@ test("Most listened song count for user 3 is correct", () => {
 })
 ```
 
+4. To check if we get the correct song information from `data.js`
+```
+import { getSong } from "./data.js";
+
+test("Get correctly information of one song", () => {
+  expect((getSong("song-1")).title).toEqual('I Got Love')
+});
+```
+

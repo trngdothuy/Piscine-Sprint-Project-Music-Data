@@ -27,7 +27,7 @@ state.userData.push([
   [questions[1]], getMostListenedSongTime(state.userId)
 ])
 
-console.log(state)
+console.log("state", state)
 
 function makeSelectorBar() {
   for (let i = 0; i < countUsers(); i++) {

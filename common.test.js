@@ -1,4 +1,5 @@
 import { countUsers, getListeningHistory, getMostListenedSongCount } from "./common.js";
+import { getSong, getListenEvents } from "./data.js";
 
 test("User count is correct", () => {
   expect(countUsers()).toEqual(4);
@@ -18,4 +19,8 @@ test("Most listened song count for user 2 is correct", () => {
 
 test("Most listened song count for user 3 is correct", () => {
   expect((getMostListenedSongCount(3)).title).toEqual("Be More Kind")
+});
+
+test("Get correctly information of one song", () => {
+  expect((getSong("song-1")).title).toEqual('I Got Love')
 });
