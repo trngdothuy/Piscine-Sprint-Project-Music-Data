@@ -1,4 +1,4 @@
-import { countUsers, getMostListenedSongCount } from "./common.js";
+import { countUsers, getMostListenedSongCount, getMostListenedSongTime } from "./common.js";
 
 const userSelector = document.getElementById("user-selector")
 const userId = document.querySelector("h2")
@@ -23,6 +23,9 @@ let state = {
 state.userData.push([
   [questions[0]], getMostListenedSongCount(state.userId)
 ])
+state.userData.push([
+  [questions[1]], getMostListenedSongTime(state.userId)
+])
 
 console.log(state)
 
@@ -40,30 +43,32 @@ makeSelectorBar()
 userSelector.addEventListener("change", (e) => {
   e.preventDefault()
   console.log(e.target.value, "userSelector clicked")
-  // update state.userId = e.target.value
+  // update state.userId = e.target.value for multi users
 })
 
 // render
 function render() {
  userId.innerHTML = `User ${state.userId} Listening History`
 
- state.userData.forEach((question) => {
-  console.log(question[0])
+ if (state.userData.length === 0) {
+  userDataDiv.innerText = "This user has no listening history"
+ } else {
+  for (let i = 0; i < state.userData.length; i++) {
+    const div = document.createElement("div")
+    div.className = "questionDiv"
 
-  const div = document.createElement("div")
-  div.className = "questionDiv"
+    const questionP = document.createElement("p")
+    questionP.className = "question-p"
+    questionP.innerHTML = `${state.userData[i][0]}:` 
 
-  const questionP = document.createElement("p")
-  questionP.className = "question-p"
-  questionP.innerHTML = `${question[0]}:` 
+    const answerP = document.createElement("p")
+    answerP.className = "answer-p"
+    answerP.innerHTML = `${state.userData[i][1].artist} - ${state.userData[i][1].title}`
 
-  const answerP = document.createElement("p")
-  answerP.className = "answer-p"
-  answerP.innerHTML = `${question[1].artist} - ${question[1].title}`
-
-  div.append(questionP, answerP)
-  userDataDiv.append(div)
- }) 
+    div.append(questionP, answerP)
+    userDataDiv.append(div)
+  }
+ }
 }
 
 render()
