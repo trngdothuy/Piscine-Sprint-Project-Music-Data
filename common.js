@@ -2,7 +2,6 @@ import { getUserIDs, getSong, getListenEvents } from "./data.js";
 
 export const countUsers = () => getUserIDs().length;
 
-
 export function getListeningHistory(userId) {
     return getListenEvents(userId)
 };
@@ -36,8 +35,6 @@ export function getMostListenedSongTime(userId) {
     return `${result.artist} - ${result.title}`
 }
 
-console.log("aaa", getMostListenedSongTime(1))
-
 export function getMostListenedArtistCount(userId) {
     const songsList = getSongsList(userId)
     console.log(getSong(userId))
@@ -51,8 +48,7 @@ export function getMostListenedArtistCount(userId) {
         return accumulator;
 }, {});
     console.log("res", result)
-    const mostListenedArtist = Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
-    console.log("mostListenedArtist", mostListenedArtist)
+    return Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
 }
 
 console.log(getMostListenedArtistCount(1))
