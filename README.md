@@ -40,13 +40,17 @@ npm install http-server
 - [ ] Unit tests must be written for at least one non-trivial function.
 - [ ] The website must score 100 for accessibility in Lighthouse
 
-#### Bonus points (which don't mean anything):
+#### Bonus points (which don't mean anything)
 
 - [ ] Re-using code between the "most often" questions (i.e. questions 1, 2, 3, 4).
 - [ ] End-to-end tests.
 
-## Breakdowns the problem:
-1. Level 100: Create a site to display listening information of User 1
-2. Level 200: Can choose from the selector bar and switch between users, display information of selected user
-3. Level 300: Hide empty questions, adjust top genres
-4. Level 400: Touch up UI
+## Breakdowns the problem
+### Level 100: 
+- Create a site to display listening information of User 1
+### Level 200
+- Can choose from the selector bar and switch between users, display information of selected user
+### Level 300
+- Hide empty questions, adjust top genres
+### Level 400
+- Touch up UI

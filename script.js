@@ -19,6 +19,13 @@ let state = {
     "userData": [],
 }
 
+// update state
+state.userData.push([
+  [questions[0]], getMostListenedSongCount(state.userId)
+])
+
+console.log(state)
+
 function makeSelectorBar() {
   for (let i = 0; i < countUsers(); i++) {
     let option = document.createElement("option")
@@ -35,13 +42,6 @@ userSelector.addEventListener("change", (e) => {
   console.log(e.target.value, "userSelector clicked")
   // update state.userId = e.target.value
 })
-
-// update state
-state.userData.push([
-  [questions[0]], getMostListenedSongCount(state.userId)
-])
-
-console.log(state)
 
 // render
 function render() {
