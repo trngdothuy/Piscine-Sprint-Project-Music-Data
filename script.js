@@ -57,7 +57,10 @@ function render() {
   userDataDiv.innerText = "This user has no listening history"
  } else {
   for (let i = 0; i < state.userData.length; i++) {
-    const div = document.createElement("div")
+    if (state.userData[i][1].length == 0) {
+      
+    } else {
+      const div = document.createElement("div")
     div.className = "questionDiv"
 
     const questionP = document.createElement("p")
@@ -70,6 +73,7 @@ function render() {
 
     div.append(questionP, answerP)
     userDataDiv.append(div)
+    }
   }
  }
 }
