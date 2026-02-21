@@ -63,7 +63,7 @@ function render() {
 
     const answerP = document.createElement("p")
     answerP.className = "answer-p"
-    answerP.innerHTML = `${state.userData[i][1].artist} - ${state.userData[i][1].title}`
+    answerP.innerHTML = `${state.userData[i][1]}`
 
     div.append(questionP, answerP)
     userDataDiv.append(div)
