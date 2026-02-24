@@ -50,3 +50,11 @@ test("Get correctly information of one song", () => {
 });
 ```
 
+5. To check if we successfully get listen events from data.js `data.js`
+```
+import { getListenEvents } from "./data.js";
+
+test("Successfully get listen events from data.js", () => {
+  expect(typeof(getListenEvents(1))).toEqual('object')
+});
+```

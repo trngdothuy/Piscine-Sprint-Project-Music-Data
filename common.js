@@ -62,5 +62,4 @@ export function getMostListenedArtistTime(userId) {
     return Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
 }
 
-console.log(getMostListenedArtistTime(1))
-// console.log(((getMostListenedSongCount(3)).title));
+console.log(getMostListenedSongCount(2))
