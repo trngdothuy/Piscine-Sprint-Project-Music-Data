@@ -36,7 +36,7 @@ state.userData.push([
 console.log("state", state)
 
 function makeSelectorBar() {
-  for (let i = 0; i < countUsers(); i++) {
+  for (let i = 1; i <= countUsers(); i++) {
     let option = document.createElement("option")
     option.value = i;
     option.innerHTML = `User ${i}`
