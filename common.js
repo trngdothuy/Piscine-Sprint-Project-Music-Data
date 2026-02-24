@@ -6,7 +6,7 @@ export function getListeningHistory(userId) {
     return getListenEvents(userId)
 };
 
-console.log(getListeningHistory(1))
+console.log("getListeningHistory(1)", getListeningHistory(1))
 
 function getSongsList(userId) {
     let songs = {} 
@@ -26,7 +26,7 @@ export function getMostListenedSongCount(userId) {
 }
 
 export function getMostListenedSongTime(userId) {
-    const songsList = [...getSongsList(userId)]
+    const songsList = getSongsList(userId)
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
@@ -37,19 +37,30 @@ export function getMostListenedSongTime(userId) {
 
 export function getMostListenedArtistCount(userId) {
     const songsList = getSongsList(userId)
-    console.log(getSong(userId))
-    console.log("songsList", songsList)
     songsList.map((song) => {
         song[0] = getSong(song[0])["artist"]
     })
-    console.log("songsList after", songsList)
     const result = songsList.reduce((accumulator, [name, value]) => {
         accumulator[name] = (accumulator[name] || 0) + value;
         return accumulator;
-}, {});
-    console.log("res", result)
+    }, {});
     return Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
 }
 
-console.log(getMostListenedArtistCount(1))
+export function getMostListenedArtistTime(userId) {
+    const songsList = getSongsList(userId)
+    songsList.forEach(song => {
+        song[1] *= getSong(song[0])["duration_seconds"]
+    })
+    songsList.map((song) => {
+        song[0] = getSong(song[0])["artist"]
+    })
+    const result = songsList.reduce((accumulator, [name, value]) => {
+        accumulator[name] = (accumulator[name] || 0) + value;
+        return accumulator;
+    }, {});
+    return Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
+}
+
+console.log(getMostListenedArtistTime(1))
 // console.log(((getMostListenedSongCount(3)).title));

@@ -1,4 +1,4 @@
-import { countUsers, getMostListenedSongCount, getMostListenedSongTime, getMostListenedArtistCount } from "./common.js";
+import { countUsers, getMostListenedSongCount, getMostListenedSongTime, getMostListenedArtistCount, getMostListenedArtistTime } from "./common.js";
 
 const userSelector = document.getElementById("user-selector")
 const userId = document.querySelector("h2")
@@ -28,6 +28,9 @@ state.userData.push([
 ])
 state.userData.push([
   [questions[2]], getMostListenedArtistCount(state.userId)
+])
+state.userData.push([
+  [questions[3]], getMostListenedArtistTime(state.userId)
 ])
 
 console.log("state", state)
