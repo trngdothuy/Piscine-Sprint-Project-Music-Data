@@ -58,3 +58,13 @@ test("Successfully get listen events from data.js", () => {
   expect(typeof(getListenEvents(1))).toEqual('object')
 });
 ```
+
+6. To check if isFridayNight works correctly
+```
+import { isFridayNight } from "./common.js";
+
+test("If timestamp is from Friday 5pm to Saturday 4am, then return true", () => {
+  expect(isFridayNight("2024-08-02T18:30:00")).toEqual(true)
+  expect(isFridayNight("2024-08-01T18:30:00")).toEqual(false)
+})
+```

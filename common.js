@@ -62,4 +62,16 @@ export function getMostListenedArtistTime(userId) {
     return Object.entries(result).sort((a, b) => b[1] - a[1]).shift()[0]
 }
 
+export function isFridayNight(timestamp) {
+    const date = new Date(timestamp)
+
+    const day = date.getDay()
+    const time = date.getHours()
+
+    const isFridayEvening = day === 5 && time >= 17
+    const isSaturdayMorning = day === 6 && time <= 4
+    
+    return isFridayEvening || isSaturdayMorning
+}
+
 console.log(getMostListenedSongCount(2))
