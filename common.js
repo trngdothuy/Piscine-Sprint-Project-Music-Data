@@ -74,10 +74,24 @@ export function isFridayNight(timestamp) {
     return isFridayEvening || isSaturdayMorning
 }
 
-export function getMostListenedSongFridayNightCount(userId) {
+function fridayNightListeningHistory(userId) {
     const songsList = getListeningHistory(userId)
-    const fridayNightListeningEvents = songsList.filter((item) => isFridayNight(item.timestamp))
-    const fridayNightSongsList = convertListeningEventsToSongsList(fridayNightListeningEvents)
+    return songsList.filter((item) => isFridayNight(item.timestamp))
+}
+
+export function getMostListenedSongFridayNightCount(userId) {
+    const listeningHistory = fridayNightListeningHistory(userId)
+    const fridayNightSongsList = convertListeningEventsToSongsList(listeningHistory)
     return getTopSong(fridayNightSongsList)
 }
-console.log("he", getMostListenedSongFridayNightCount(1))
+
+export function getMostListenedSongFridayNightTime(userId) {
+    const listeningHistory = fridayNightListeningHistory(userId)
+    const songsList = convertListeningEventsToSongsList(listeningHistory)
+    songsList.forEach(song => {
+        song[1] *= getSong(song[0])["duration_seconds"]
+    })
+    return getTopSong(songsList)
+}
+
+console.log("he", getMostListenedSongFridayNightTime(1))
