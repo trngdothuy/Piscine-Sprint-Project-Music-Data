@@ -9,15 +9,9 @@ test("Successfully fetch users listening events", () => {
   expect(typeof(getListeningHistory(1))).toEqual("object")
 });
 
-test("Most listened song count for user 1 is correct", () => {
+test("Most listened song count for each user is correct", () => {
   expect(getMostListenedSongCount(1)).toEqual("The Swell Season - When Your Mind's Made Up")
-});
-
-test("Most listened song count for user 2 is correct", () => {
   expect(getMostListenedSongCount(2)).toEqual("Frank Turner - I Still Believe")
-});
-
-test("Most listened song count for user 3 is correct", () => {
   expect(getMostListenedSongCount(3)).toEqual("Frank Turner - Be More Kind")
 });
 
