@@ -1,0 +1,28 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.selector-bar {
+    display: flex;
+    justify-content: center;
+}
+
+#user-data {
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-p, .answer-p {
+    display: flex;
+    justify-content: center;
+}
+
+.question-p {
+    color: red;
+}
