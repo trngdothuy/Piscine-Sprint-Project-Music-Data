@@ -94,4 +94,72 @@ export function getMostListenedSongFridayNightTime(userId) {
     return getTopSong(songsList)
 }
 
-console.log("he", getMostListenedSongFridayNightTime(1))
+export function getMostStreakSong(userId) {
+    const songsList = getListeningHistory(userId)
+    let maxStreakSong = songsList[0]["song_id"]
+    let maxStreakCount = 1
+    let currentStreakSong = songsList[0]["song_id"]
+    let currentStreakCount = 1
+
+    for (let i = 0; i < songsList.length; i++) {
+        if (songsList[i]["song_id"] === currentStreakSong) {
+            currentStreakCount++
+        } else {
+            if (currentStreakCount > maxStreakCount) {
+                maxStreakSong = currentStreakSong
+                maxStreakCount = currentStreakCount
+            }
+            currentStreakSong = songsList[i + 1]["song_id"]
+            currentStreakCount = 1
+        }
+    }
+    const result = getSong(maxStreakSong)
+    return `${result.artist} - ${result.title} (length: ${maxStreakCount - 1})`
+}
+
+export function getSongListenedEveryDay(userId) {
+    const listeningHistory = getListeningHistory(userId)
+
+    // get unique days
+    let uniqueDays = new Set()
+    listeningHistory.forEach((item) => uniqueDays.add(item.timestamp.split('T')[0]))
+    const numberOfUniqueDays = uniqueDays.size
+
+    // each song with list of days played
+    let songDaysPlayedList = {}
+    for (const item of listeningHistory) {
+        const day = item.timestamp.split('T')[0]
+        if (!songDaysPlayedList[item.song_id]) {
+            songDaysPlayedList[item.song_id] = new Set()
+        }
+        songDaysPlayedList[item.song_id].add(day)
+    }
+
+    // for each song, compare the days played with unique days, same => yes
+    for (const song of Object.entries(songDaysPlayedList)) {
+        const numberOfDaysPlayed = song[1].size
+        if (numberOfDaysPlayed === numberOfUniqueDays) {
+            const result = getSong(song[0])
+            return `${result.artist} - ${result.title}`
+        } 
+    }
+    return null
+}
+
+export function getTopGenres(userId) {
+    const songsList = getSongsList(userId)
+    const listSorted = songsList.sort((a, b) => b[1] - a[1])
+    listSorted.map((song) => song[0] = getSong(song[0]).genre)
+
+    const genresList = listSorted.reduce((accumulator, [name, value]) => {
+        accumulator[name] = (accumulator[name] || 0) + value;
+        return accumulator;
+    }, {});
+
+    const genresListSorted = Object.entries(genresList).sort((a, b) => b[1] - a[1])
+    const topGenres = genresListSorted.slice(0, 3)
+
+    const result = []
+    topGenres.forEach((genre) => result.push(genre[0]))
+    return result
+}

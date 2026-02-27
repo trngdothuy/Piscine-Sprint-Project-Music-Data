@@ -1,4 +1,4 @@
-import { countUsers, getMostListenedSongCount, getMostListenedSongTime, getMostListenedArtistCount, getMostListenedArtistTime, getMostListenedSongFridayNightCount, getMostListenedSongFridayNightTime } from "./common.js";
+import { countUsers, getMostListenedSongCount, getMostListenedSongTime, getMostListenedArtistCount, getMostListenedArtistTime, getMostListenedSongFridayNightCount, getMostListenedSongFridayNightTime, getMostStreakSong, getSongListenedEveryDay, getTopGenres } from "./common.js";
 
 const userSelector = document.getElementById("user-selector")
 const userId = document.querySelector("h2")
@@ -38,6 +38,22 @@ state.userData.push([
 state.userData.push([
   [questions[5]], getMostListenedSongFridayNightTime(state.userId)
 ]);
+state.userData.push([
+  [questions[6]], getMostStreakSong(state.userId)
+]);
+state.userData.push([
+  [questions[7]], getSongListenedEveryDay(state.userId)
+]);
+
+if (getTopGenres(state.userId).length > 1) {
+  state.userData.push([
+  `Top ${getTopGenres(state.userId).length} genres`, getTopGenres(state.userId).join(", ")
+]);
+} else {
+  state.userData.push([
+  "Top genre", getSongListenedEveryDay(state.userId)
+]);
+}
 
 console.log("state", state)
 
