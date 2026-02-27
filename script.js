@@ -87,15 +87,23 @@ function render() {
   userIdText.innerHTML = `User ${state.userId} Listening History`
   userDataDiv.append(userIdText)
 
- if (state.userData.length === 0) {
-  userDataDiv.innerText = "This user has no listening history"
+  const noValidData = state.userData.every(item => {
+    if (item[1] === null || item[1] === "" || Array.isArray(item[1]) && item[1].length === 0) {
+      return true
+    }
+  })
+
+ if (noValidData) {
+  const text = document.createElement("p")
+  text.className = "text-p"
+  text.innerText = "This user has no listening history"
+  userDataDiv.append(text)
  } else {
   for (let i = 0; i < state.userData.length; i++) {
-    console.log(state.userData[i][1])
     if (!state.userData[i][1] || state.userData[i][1].length == 0) {
       // hide 
     } else {
-      const div = document.createElement("div")
+    const div = document.createElement("div")
     div.className = "questionDiv"
 
     const questionP = document.createElement("p")

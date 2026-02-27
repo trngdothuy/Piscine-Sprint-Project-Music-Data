@@ -6,7 +6,7 @@ export function getListeningHistory(userId) {
     return getListenEvents(userId)
 };
 
-console.log("getListeningHistory(1)", getListeningHistory(1))
+console.log("getListeningHistory(4)", getListeningHistory(4))
 
 function getSongsList(userId) {
     return convertListeningEventsToSongsList(getListeningHistory(userId))
@@ -30,7 +30,7 @@ function getTopSong(list) {
 
 export function getMostListenedSongCount(userId) {
     const songsList = getSongsList(userId)
-    return getTopSong(songsList)
+    return songsList.length === 0 ? [] : getTopSong(songsList)
 }
 
 export function getMostListenedSongTime(userId) {
@@ -38,7 +38,7 @@ export function getMostListenedSongTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return getTopSong(songsList)
+    return songsList.length === 0 ? [] : getTopSong(songsList)
 }
 
 function getTopArtist(list) {
@@ -54,7 +54,7 @@ function getTopArtist(list) {
 
 export function getMostListenedArtistCount(userId) {
     const songsList = getSongsList(userId)
-    return getTopArtist(songsList)
+    return songsList.length === 0 ? [] : getTopArtist(songsList)
 }
 
 export function getMostListenedArtistTime(userId) {
@@ -62,7 +62,7 @@ export function getMostListenedArtistTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return getTopArtist(songsList)
+    return songsList.length === 0 ? [] : getTopArtist(songsList)
 }
 
 export function isFridayNight(timestamp) {
@@ -96,6 +96,9 @@ export function getMostListenedSongFridayNightTime(userId) {
 
 export function getMostStreakSong(userId) {
     const songsList = getListeningHistory(userId)
+    if (songsList.length === 0 ) {
+        return null
+    }
     let maxStreakSong = songsList[0]["song_id"]
     let maxStreakCount = 1
     let currentStreakSong = songsList[0]["song_id"]
