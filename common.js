@@ -136,15 +136,17 @@ export function getSongListenedEveryDay(userId) {
         songDaysPlayedList[item.song_id].add(day)
     }
 
+    const result = []
+
     // for each song, compare the days played with unique days, same => yes
     for (const song of Object.entries(songDaysPlayedList)) {
         const numberOfDaysPlayed = song[1].size
         if (numberOfDaysPlayed === numberOfUniqueDays) {
-            const result = getSong(song[0])
-            return `${result.artist} - ${result.title}`
+            const everydaySong = getSong(song[0])
+            result.push(`${everydaySong.artist} - ${everydaySong.title}`)
         } 
     }
-    return null
+    return result
 }
 
 export function getTopGenres(userId) {

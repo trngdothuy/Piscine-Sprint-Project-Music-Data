@@ -43,7 +43,7 @@ function updateState(userId) {
     [questions[6]], getMostStreakSong(userId)
   ]);
   state.userData.push([
-    [questions[7]], getSongListenedEveryDay(userId)
+    [questions[7]], getSongListenedEveryDay(userId).join(", ")
   ]);
 
   if (getTopGenres(userId).length > 1) {
@@ -77,16 +77,13 @@ userSelector.addEventListener("change", (e) => {
   // update state.userId = e.target.value for multi users
   state.userId = e.target.value;
   state.userData = [];
-  console.log("st", state)
   userDataDiv.innerHTML = ""
   render()
-  console.log("userIdText", userIdText)
 })
 
 // render
 function render() {
   updateState(state.userId)
-  console.log("gg", state.userId)
   userIdText.innerHTML = `User ${state.userId} Listening History`
   userDataDiv.append(userIdText)
 
