@@ -101,7 +101,7 @@ export function getMostStreakSong(userId) {
     let currentStreakSong = songsList[0]["song_id"]
     let currentStreakCount = 1
 
-    for (let i = 0; i < songsList.length; i++) {
+    for (let i = 0; i < songsList.length - 1; i++) {
         if (songsList[i]["song_id"] === currentStreakSong) {
             currentStreakCount++
         } else {
@@ -109,12 +109,13 @@ export function getMostStreakSong(userId) {
                 maxStreakSong = currentStreakSong
                 maxStreakCount = currentStreakCount
             }
+            // console.log("sigfhj", songsList[i + 1])
             currentStreakSong = songsList[i + 1]["song_id"]
             currentStreakCount = 1
         }
     }
     const result = getSong(maxStreakSong)
-    return `${result.artist} - ${result.title} (length: ${maxStreakCount - 1})`
+    return `${result.artist} - ${result.title} (length: ${maxStreakCount})`
 }
 
 export function getSongListenedEveryDay(userId) {
