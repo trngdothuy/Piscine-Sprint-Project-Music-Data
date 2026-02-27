@@ -6,7 +6,7 @@ export function getListeningHistory(userId) {
     return getListenEvents(userId)
 };
 
-console.log("getListeningHistory(1)", getListeningHistory(1))
+console.log("getListeningHistory(4)", getListeningHistory(4))
 
 function getSongsList(userId) {
     return convertListeningEventsToSongsList(getListeningHistory(userId))
@@ -30,7 +30,7 @@ function getTopSong(list) {
 
 export function getMostListenedSongCount(userId) {
     const songsList = getSongsList(userId)
-    return getTopSong(songsList)
+    return songsList.length === 0 ? [] : getTopSong(songsList)
 }
 
 export function getMostListenedSongTime(userId) {
@@ -38,7 +38,7 @@ export function getMostListenedSongTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return getTopSong(songsList)
+    return songsList.length === 0 ? [] : getTopSong(songsList)
 }
 
 function getTopArtist(list) {
@@ -54,7 +54,7 @@ function getTopArtist(list) {
 
 export function getMostListenedArtistCount(userId) {
     const songsList = getSongsList(userId)
-    return getTopArtist(songsList)
+    return songsList.length === 0 ? [] : getTopArtist(songsList)
 }
 
 export function getMostListenedArtistTime(userId) {
@@ -62,7 +62,7 @@ export function getMostListenedArtistTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return getTopArtist(songsList)
+    return songsList.length === 0 ? [] : getTopArtist(songsList)
 }
 
 export function isFridayNight(timestamp) {
@@ -70,7 +70,7 @@ export function isFridayNight(timestamp) {
     const day = date.getDay()
     const time = date.getHours()
     const isFridayEvening = day === 5 && time >= 17
-    const isSaturdayMorning = day === 6 && time <= 4
+    const isSaturdayMorning = day === 6 && time < 4
     return isFridayEvening || isSaturdayMorning
 }
 
@@ -82,7 +82,7 @@ function fridayNightListeningHistory(userId) {
 export function getMostListenedSongFridayNightCount(userId) {
     const listeningHistory = fridayNightListeningHistory(userId)
     const fridayNightSongsList = convertListeningEventsToSongsList(listeningHistory)
-    return getTopSong(fridayNightSongsList)
+    return fridayNightSongsList.length === 0 ? null : getTopSong(fridayNightSongsList)
 }
 
 export function getMostListenedSongFridayNightTime(userId) {
@@ -91,17 +91,20 @@ export function getMostListenedSongFridayNightTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return getTopSong(songsList)
+    return songsList.length == 0 ? null : getTopSong(songsList)
 }
 
 export function getMostStreakSong(userId) {
     const songsList = getListeningHistory(userId)
+    if (songsList.length === 0 ) {
+        return null
+    }
     let maxStreakSong = songsList[0]["song_id"]
     let maxStreakCount = 1
     let currentStreakSong = songsList[0]["song_id"]
     let currentStreakCount = 1
 
-    for (let i = 0; i < songsList.length; i++) {
+    for (let i = 0; i < songsList.length - 1; i++) {
         if (songsList[i]["song_id"] === currentStreakSong) {
             currentStreakCount++
         } else {
@@ -109,12 +112,13 @@ export function getMostStreakSong(userId) {
                 maxStreakSong = currentStreakSong
                 maxStreakCount = currentStreakCount
             }
+            // console.log("sigfhj", songsList[i + 1])
             currentStreakSong = songsList[i + 1]["song_id"]
             currentStreakCount = 1
         }
     }
     const result = getSong(maxStreakSong)
-    return `${result.artist} - ${result.title} (length: ${maxStreakCount - 1})`
+    return `${result.artist} - ${result.title} (length: ${maxStreakCount})`
 }
 
 export function getSongListenedEveryDay(userId) {
@@ -135,15 +139,17 @@ export function getSongListenedEveryDay(userId) {
         songDaysPlayedList[item.song_id].add(day)
     }
 
+    const result = []
+
     // for each song, compare the days played with unique days, same => yes
     for (const song of Object.entries(songDaysPlayedList)) {
         const numberOfDaysPlayed = song[1].size
         if (numberOfDaysPlayed === numberOfUniqueDays) {
-            const result = getSong(song[0])
-            return `${result.artist} - ${result.title}`
+            const everydaySong = getSong(song[0])
+            result.push(`${everydaySong.artist} - ${everydaySong.title}`)
         } 
     }
-    return null
+    return result
 }
 
 export function getTopGenres(userId) {

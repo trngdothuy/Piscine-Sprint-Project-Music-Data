@@ -1,7 +1,7 @@
 import { countUsers, getMostListenedSongCount, getMostListenedSongTime, getMostListenedArtistCount, getMostListenedArtistTime, getMostListenedSongFridayNightCount, getMostListenedSongFridayNightTime, getMostStreakSong, getSongListenedEveryDay, getTopGenres } from "./common.js";
 
 const userSelector = document.getElementById("user-selector")
-const userId = document.querySelector("h2")
+const userIdText = document.querySelector("h2")
 const userDataDiv = document.getElementById("user-data")
 
 const questions = ["Most listened song (count)", 
@@ -20,42 +20,44 @@ let state = {
 }
 
 // update state
-state.userData.push([
-  [questions[0]], getMostListenedSongCount(state.userId)
-]);
-state.userData.push([
-  [questions[1]], getMostListenedSongTime(state.userId)
-]);
-state.userData.push([
-  [questions[2]], getMostListenedArtistCount(state.userId)
-]);
-state.userData.push([
-  [questions[3]], getMostListenedArtistTime(state.userId)
-]);
-state.userData.push([
-  [questions[4]], getMostListenedSongFridayNightCount(state.userId)
-]);
-state.userData.push([
-  [questions[5]], getMostListenedSongFridayNightTime(state.userId)
-]);
-state.userData.push([
-  [questions[6]], getMostStreakSong(state.userId)
-]);
-state.userData.push([
-  [questions[7]], getSongListenedEveryDay(state.userId)
-]);
+function updateState(userId) {
+  state.userData.push([
+    [questions[0]], getMostListenedSongCount(userId)
+  ]);
+  state.userData.push([
+    [questions[1]], getMostListenedSongTime(userId)
+  ]);
+  state.userData.push([
+    [questions[2]], getMostListenedArtistCount(userId)
+  ]);
+  state.userData.push([
+    [questions[3]], getMostListenedArtistTime(userId)
+  ]);
+  state.userData.push([
+    [questions[4]], getMostListenedSongFridayNightCount(userId)
+  ]);
+  state.userData.push([
+    [questions[5]], getMostListenedSongFridayNightTime(userId)
+  ]);
+  state.userData.push([
+    [questions[6]], getMostStreakSong(userId)
+  ]);
+  state.userData.push([
+    [questions[7]], getSongListenedEveryDay(userId).join(", ")
+  ]);
 
-if (getTopGenres(state.userId).length > 1) {
-  state.userData.push([
-  `Top ${getTopGenres(state.userId).length} genres`, getTopGenres(state.userId).join(", ")
-]);
-} else {
-  state.userData.push([
-  "Top genre", getSongListenedEveryDay(state.userId)
-]);
+  if (getTopGenres(userId).length > 1) {
+    state.userData.push([
+    `Top ${getTopGenres(userId).length} genres`, getTopGenres(userId).join(", ")
+  ]);
+  } else {
+    state.userData.push([
+    "Top genre", getTopGenres(userId)
+  ]);
+  }
+  console.log("state", state)
 }
 
-console.log("state", state)
 
 function makeSelectorBar() {
   for (let i = 1; i <= countUsers(); i++) {
@@ -68,24 +70,40 @@ function makeSelectorBar() {
 
 makeSelectorBar()
 
+// listen to the change in the user selector, then change the state and re-render
 userSelector.addEventListener("change", (e) => {
   e.preventDefault()
   console.log(e.target.value, "userSelector clicked")
   // update state.userId = e.target.value for multi users
+  state.userId = e.target.value;
+  state.userData = [];
+  userDataDiv.innerHTML = ""
+  render()
 })
 
 // render
 function render() {
- userId.innerHTML = `User ${state.userId} Listening History`
+  updateState(state.userId)
+  userIdText.innerHTML = `User ${state.userId} Listening History`
+  userDataDiv.append(userIdText)
 
- if (state.userData.length === 0) {
-  userDataDiv.innerText = "This user has no listening history"
+  const noValidData = state.userData.every(item => {
+    if (item[1] === null || item[1] === "" || Array.isArray(item[1]) && item[1].length === 0) {
+      return true
+    }
+  })
+
+ if (noValidData) {
+  const text = document.createElement("p")
+  text.className = "text-p"
+  text.innerText = "This user has no listening history"
+  userDataDiv.append(text)
  } else {
   for (let i = 0; i < state.userData.length; i++) {
-    if (state.userData[i][1].length == 0) {
-      
+    if (!state.userData[i][1] || state.userData[i][1].length == 0) {
+      // hide 
     } else {
-      const div = document.createElement("div")
+    const div = document.createElement("div")
     div.className = "questionDiv"
 
     const questionP = document.createElement("p")
@@ -104,3 +122,5 @@ function render() {
 }
 
 render()
+
+
