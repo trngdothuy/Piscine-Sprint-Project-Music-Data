@@ -91,7 +91,7 @@ export function getMostListenedSongFridayNightTime(userId) {
     songsList.forEach(song => {
         song[1] *= getSong(song[0])["duration_seconds"]
     })
-    return songsList.length === 0 ? null : getTopSong(songsList)
+    return songsList.length == 0 ? null : getTopSong(songsList)
 }
 
 export function getMostStreakSong(userId) {

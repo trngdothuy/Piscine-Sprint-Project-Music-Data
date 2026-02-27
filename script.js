@@ -91,7 +91,8 @@ function render() {
   userDataDiv.innerText = "This user has no listening history"
  } else {
   for (let i = 0; i < state.userData.length; i++) {
-    if (state.userData[i][1].length == 0) {
+    console.log(state.userData[i][1])
+    if (!state.userData[i][1] || state.userData[i][1].length == 0) {
       // hide 
     } else {
       const div = document.createElement("div")
