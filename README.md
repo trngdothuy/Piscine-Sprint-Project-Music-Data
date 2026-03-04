@@ -47,8 +47,8 @@ npm install http-server
 
 ## Breakdowns the problem
 ### Level 100: 
-[x] Create a site to display listening information of User 1
+- [x] Create a site to display listening information of User 1
 ### Level 200
-[x] Can choose from the selector bar and switch between users, display information of selected user
-[x] Hide empty questions, adjust top genres
-[x] Touch up UI
+- [x] Can choose from the selector bar and switch between users, display information of selected user
+- [x] Hide empty questions, adjust top genres
+- [x] Touch up UI
