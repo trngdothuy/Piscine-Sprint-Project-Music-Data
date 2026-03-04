@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Mono:wght@400;500&display=swap');
 
-/* ── TOKENS ─────────────────────────────────────────────── */
+/* TOKENS */
 :root {
   --bg:       #09090d;
   --surface:  #111117;
@@ -14,7 +14,7 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── BASE ───────────────────────────────────────────────── */
+/* BASE */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -27,14 +27,14 @@ body {
   background-image: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(212,168,67,0.05), transparent 70%);
 }
 
-/* ── LAYOUT ─────────────────────────────────────────────── */
+/* LAYOUT */
 main {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 24px 80px;
 }
 
-/* ── H1 ─────────────────────────────────────────────────── */
+/* H1 */
 h1 {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 6vw, 3.2rem);
@@ -57,7 +57,7 @@ h1::after {
   animation: growLine 0.7s 0.3s var(--ease) forwards;
 }
 
-/* ── H2 (user title) ────────────────────────────────────── */
+/* H2 (user title) */
 h2 {
   font-family: var(--font-serif);
   font-size: clamp(1.1rem, 3vw, 1.5rem);
@@ -66,7 +66,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* ── SELECTOR BAR ───────────────────────────────────────── */
+/* SELECTOR BAR */
 .selector-bar {
   display: flex;
   align-items: center;
@@ -106,7 +106,7 @@ h2 {
   box-shadow: 0 0 0 3px rgba(212,168,67,0.12);
 }
 
-/* ── USER DATA ──────────────────────────────────────────── */
+/* USER DATA */
 #user-data {
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@ h2 {
   animation: fadeUp 0.5s 0.2s var(--ease) both;
 }
 
-/* ── QUESTION / ANSWER BLOCKS ───────────────────────────── */
+/* QUESTION / ANSWER BLOCKS */
 .questionDiv {
   border-radius: 8px;
   overflow: hidden;
@@ -154,7 +154,7 @@ h2 {
 .questionDiv:nth-child(8)  { animation: fadeUp 0.3s 0.33s var(--ease) both; }
 .questionDiv:nth-child(9)  { animation: fadeUp 0.3s 0.37s var(--ease) both; }
 
-/* ── ANIMATIONS ─────────────────────────────────────────── */
+/* ANIMATIONS */
 @keyframes fadeDown {
   from { opacity: 0; transform: translateY(-16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -169,7 +169,7 @@ h2 {
   to { width: 44px; }
 }
 
-/* ── MOBILE ─────────────────────────────────────────────── */
+/* MOBILE */
 @media (max-width: 500px) {
   main { padding: 0 16px 60px; }
   .selector-bar { flex-direction: column; gap: 8px; }
