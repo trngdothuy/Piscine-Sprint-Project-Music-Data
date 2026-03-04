@@ -42,7 +42,7 @@ npm install http-server
 
 #### Bonus points (which don't mean anything)
 
-- [ ] Re-using code between the "most often" questions (i.e. questions 1, 2, 3, 4).
+- [x] Re-using code between the "most often" questions (i.e. questions 1, 2, 3, 4).
 - [ ] End-to-end tests.
 
 ## Breakdowns the problem
@@ -50,7 +50,5 @@ npm install http-server
 [x] Create a site to display listening information of User 1
 ### Level 200
 [x] Can choose from the selector bar and switch between users, display information of selected user
-### Level 300
 [x] Hide empty questions, adjust top genres
-### Level 400
-[ ] Touch up UI
+[x] Touch up UI
