@@ -38,12 +38,12 @@ npm install http-server
     - [x] If a question doesn't apply (e.g. if no songs were ever listened to on a Friday night), the interface should completely hide the question and answer. Displaying the question and an empty result, or any kind of error, is not acceptable.
     - [x] If fewer than three (but more than zero) genres were listened to the site should list the top genres listened to. It must not display text like "Top 3 genres", but may say "Top genres" or "Top 2 genres" or similar.
 - [x] Unit tests must be written for at least one non-trivial function.
-- [ ] The website must score 100 for accessibility in Lighthouse
+- [x] The website must score 100 for accessibility in Lighthouse
 
 #### Bonus points (which don't mean anything)
 
 - [x] Re-using code between the "most often" questions (i.e. questions 1, 2, 3, 4).
-- [ ] End-to-end tests.
+- [x] End-to-end tests.
 
 ## Breakdowns the problem
 ### Level 100: 
